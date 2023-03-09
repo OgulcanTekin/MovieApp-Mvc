@@ -36,25 +36,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li>
-                    <li   class="nav-item dropdown">
+                    <li  th:if="${user!=null}"  class="nav-item dropdown">
                         <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
                             role="button">
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
                                 height="25" alt="Black and White Portrait of a Man" loading="lazy" />
                         </a>
                         </a>
-                        <ul class="dropdown-menu text-center">
-                            <li><a  class="dropdown-item" href="#">musty1406 </a></li>
 
-                            <li><a  class="dropdown-item" href="#">user</a></li>
+                        <ul class="dropdown-menu text-center">
+                            <li><a th:text="${user.name}"  class="dropdown-item" href="#"></a></li>
+                            <li><a th:text="${user.userType}"  class="dropdown-item" href="#"></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li ><a class="dropdown-item" href="#">Something else here</a></li>
-                            <a   class="btn btn-danger" >Logout</a>
+                            <a th:href="${'/login'}"  class="btn btn-danger" >Logout</a>
                         </ul>
                     </li>
-                    <a class="btn btn-success mx-3 my-1" >Login</a>
+                    <a th:href="${'/login'}" th:if="${user==null}" class="btn btn-success mx-3 my-1" >Login</a>
+
 
                 </ul>
             </div>
@@ -75,17 +76,9 @@
                     data-bs-parent="#accordionExample" id="collapseOne">
                     <div class="accordion-body ">
                         <form class="gnr" action="/movie" method="get" >
-                            <div   class="d-flex justify-content-between">
-                                <label>Drama</label>
-                                <input  name="genre" type="checkbox">
-                            </div>
-                            <div   class="d-flex justify-content-between">
-                                <label>Action</label>
-                                <input  name="genre" type="checkbox">
-                            </div>
-                            <div   class="d-flex justify-content-between">
-                                <label>Drama</label>
-                                <input  name="genre" type="checkbox">
+                            <div th:each="genre:${genreservice.findAll()}" class="d-flex justify-content-between">
+                                <label th:text="${genre.name}"  ></label>
+                                <input th:value="${genre.name}" name="genre" type="checkbox">
                             </div>
                             <div class="mt-2 d-flex justify-content-end align-items-center">
                                 <button type="submit" class="btn btn-danger">Filtrele</button>
@@ -112,26 +105,36 @@
                     </div>
                 </div>
             </div>
-           
+
         </div>
         <div class="col-sm-7  col-md-9  allfilm  d-flex  flex-wrap justify-content-center ">
 
-            <div th:each="movie:${movies}" class="card my-2 mx-2" style="max-width: 20rem; ">
-                <a class="cm" >
-                    <img  th:src="${movie.image}" class="card-img-top" >
+            <div th:each="movie:${movies}" class="card my-2 mx-2" style="width:20rem;">
+
+
+                <a th:if="${user==null}" th:href="${'/movie/findbyid/'+movie.id}" class="cm" >
+                    <img   th:src="${movie.image}" class="card-img-top" th:alt="${movie.name+'_image'}">
                     <div class="card-body sum d-flex flex-column">
-                        <h5 th:text="${movie.name}" class="card-title"></h5>
-                        <p th:utext="${movie.summary}" ></p>
+                        <h5 th:text="${movie.name}"  class="card-title"></h5>
+                        <p  th:utext="${movie.summary}"></p>
                     </div>
                 </a>
+                <a th:if="${user!=null}" th:href="${'/movie/findbyid/'+movie.id+'?userId='+user.id}" class="cm" >
+                    <img   th:src="${movie.image}" class="card-img-top" th:alt="${movie.name+'_image'}">
+                    <div class="card-body sum d-flex flex-column">
+                        <h5 th:text="${movie.name}"  class="card-title"></h5>
+                        <p  th:utext="${movie.summary}"></p>
+                    </div>
+                </a>
+
                 <ul class="list-group list-group-flush">
                     <li th:text="${'Language: '+movie.language}"  class="list-group-item"></li>
                     <li th:text="${'Rating: '+movie.rating}" class="list-group-item"></li>
                     <li th:text="${'Premiered: '+movie.premired}"  class="list-group-item"></li>
                     <li th:text="${'Country: '+movie?.country}" class="list-group-item"></li>
                     <div class="d-flex justify-content-around my-2">
-                        <li th:each="genre:${movie.genres}" class="list-group-item badge rounded-pill text-bg-primary">
-                            <span th:text="${genre}" ></span>
+                        <li th:each="genreId:${movie.genres}" class="list-group-item badge rounded-pill text-bg-primary">
+                            <span th:text="${genreservice.getGenreName(genreId)}" ></span>
                         </li>
                     </div>
                 </ul>

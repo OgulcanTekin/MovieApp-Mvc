@@ -1,7 +1,9 @@
 package com.bilgeadam.mapper;
 
+import com.bilgeadam.dto.request.MovieCommentCreateRequestDto;
 import com.bilgeadam.dto.request.UserResgisterRequestDto;
 import com.bilgeadam.dto.response.LoginResponseDto;
+import com.bilgeadam.repository.entity.MovieComment;
 import com.bilgeadam.repository.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -16,5 +18,5 @@ public interface IUserMapper {
 
     LoginResponseDto toLoginResponseDto(final User user);
 
-
+    MovieComment toMovieComment(final MovieCommentCreateRequestDto dto);
 }

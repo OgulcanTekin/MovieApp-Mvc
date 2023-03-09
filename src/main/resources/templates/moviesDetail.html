@@ -39,25 +39,26 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
-                <li    class="nav-item dropdown">
+                <li  th:if="${user!=null}"  class="nav-item dropdown">
                     <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
                        role="button">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle"
                              height="25" alt="Black and White Portrait of a Man" loading="lazy" />
                     </a>
                     </a>
-                    <ul class="dropdown-menu text-center">
-                        <li><a class="dropdown-item" href="#"> musty1406</a></li>
 
-                        <li><a  class="dropdown-item" href="#">User</a></li>
+                    <ul class="dropdown-menu text-center">
+                        <li><a th:text="${user.name}"  class="dropdown-item" href="#"></a></li>
+                        <li><a th:text="${user.userType}"  class="dropdown-item" href="#"></a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        <a  class="btn btn-danger" >Logout</a>
+                        <li ><a class="dropdown-item" href="#">Something else here</a></li>
+                        <a th:href="${'/login'}"  class="btn btn-danger" >Logout</a>
                     </ul>
                 </li>
-                <a  class="btn btn-success mx-3" >Login</a>
+                <a th:href="${'/login'}" th:if="${user==null}" class="btn btn-success mx-3 my-1" >Login</a>
+
 
             </ul>
         </div>
@@ -68,44 +69,34 @@
     <div class=" w-100 h-100 d-flex flex-column my-5 justify-content-between align-items-center">
         <div class="container  p-3 main content row justify-content-around align-item-center
      bg-light">
-            <img src="https://static.tvmaze.com/uploads/images/medium_portrait/81/202627.jpg" height="100%" class="col-md-4" alt="...">
+            <img th:src="${movie.image}" height="100%" class="col-md-4" th:alt="${movie.name+'afis'}">
             <div class="moviedetail d-flex flex-column justify-content-around  col-md-7">
-                <h4 >Under The Doom</h4>
+                <h4 th:text="${movie.name}"></h4>
                 <div>
                     <span>Puan:</span>
-                    <span  >8/10</span>
+                    <span th:text="${movie.rating+'/10'}"></span>
                 </div>
                 <div class="d-flex gap-2">
                     <span>Etiketler:</span>
-
-                          <span >
-                            <a class="text-primary">Drama</a>
+                          <span th:each="genreId:${movie.genres}" >
+                            <a th:text="${genreservice.getGenreName(genreId)}" class="text-primary"></a>
                           </span>
-                          <span >
-                            <a class="text-primary">Action</a>
-                          </span>
-                          <span >
-                            <a class="text-primary">Sience Ficton</a>
-                          </span>
-
 
                 </div>
                 <div>
                     <span >Ülke:</span>
-                    <span >
-                            Amerika
+                    <span th:text="${movie?.country}" >
                     </span>
                 </div>
                 <div>
                     <span>Dil:</span>
-                    <span >
-                        Engish
+                    <span th:text="${movie.language}" >
+
                     </span>
                 </div>
                 <div>
                     <span>Tarih</span>
-                    <span  >
-                            2010-10-10
+                    <span th:text="${movie.premired}" >
                     </span>
                 </div>
 
@@ -118,26 +109,7 @@
                     </div>
 
                 </div>
-                <div class="border summary   border-opacity-25 border-primary rounded-2 d-flex overflow-auto p-4" > 
-             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab similique cum quidem iste vero pariatur sed odit dolor eos earum aliquam eveniet incidunt a corporis possimus molestiae ex, vel eligendi modi eaque est sit fugit laudantium! Illum laborum impedit iusto, cumque vel eveniet ut tempore placeat quidem iure. Repudiandae officiis ipsam recusandae, ad consequuntur rerum neque voluptas dolorem labore quos! Magnam, ipsa nam. Blanditiis et placeat veniam necessitatibus, mollitia dolorum officia dolores minus illo voluptate, deserunt fugit natus architecto, voluptas eius assumenda? Ea maiores tenetur reiciendis ex! Debitis modi nostrum unde. Cupiditate quo aspernatur velit eveniet. Soluta ducimus deserunt nisi impedit doloribus odit. Iusto deleniti officiis ipsa quibusdam? Necessitatibus odit qui maiores labore. Saepe necessitatibus ipsa similique molestias repellat adipisci sit accusantium dicta iure exercitationem voluptates placeat molestiae dignissimos quam laudantium obcaecati nobis ea recusandae nemo, magni praesentium explicabo ducimus neque voluptatibus. Eaque numquam fugiat veniam suscipit in laborum voluptatibus quibusdam dolor a, qui odio mollitia! Reiciendis quod quis neque sunt, facere tempora accusantium iusto consequuntur explicabo ratione laboriosam voluptatum adipisci possimus officiis officia voluptate mollitia, provident voluptatem quia eveniet. Impedit, reiciendis vitae obcaecati distinctio minima, minus ipsa quod magnam fugit facilis architecto, voluptates saepe ut odit nihil perferendis necessitatibus?
-             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
+                <div th:utext="${movie.summary}" class="border summary   border-opacity-25 border-primary rounded-2 d-flex overflow-auto p-4" >
                 </div>
             </div>
 
@@ -149,34 +121,26 @@
                         class=" mx-1 col-2 img-thumbnail rounded-start" alt="...">
                     <textarea name="content" placeholder="Yorum paylaş" class="col-9 mx-1" style="resize: none" cols="7"
                         rows="2"></textarea>
-                    <input hidden="hidden" name="userId" >
-                    <input hidden="hidden" name="movieId" >
+                    <input hidden="hidden" th:value="${user.id}" name="userId" >
+                    <input hidden="hidden" th:value="${movie.id}"  name="movieId" >
                 </div>
 
                 <button type="submit" class="btn btn-primary w-25 align-self-end mb-2 mx-3">Paylaş</button>
             </form>
 
 
-            <div  class="card usercard d-flex flex-column  p-3 align-items-center w-75  my-2">
-                <div class="row d-flex container-fluid ">
+            <div th:each="commentId:${movie.comments}" class="card usercard d-flex flex-column  p-3 align-items-center w-75  my-2">
+                <div th:object="${commentservice.findById(commentId).get()}" class="row d-flex container-fluid ">
                     <div class="col-md-2 userimg">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="img-thumbnail rounded-start"
                             alt="...">
                     </div>
                     <div class="col-md-10 text-center align-self-end ">
                         <div class="card-body align-items-center">
-                            <h5  class="card-title"> </h5>
-                            <p  class="card-text"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, sunt et. Est ullam omnis corporis assumenda, ratione delectus itaque quia odio similique atque quisquam suscipit molestias aut! Soluta praesentium nostrum consectetur doloribus? Dolor numquam rerum cumque aspernatur iure, molestias eos facere, dignissimos quis ipsum unde! Incidunt cum odit possimus aliquid ea harum maiores expedita adipisci dolor doloribus aspernatur velit qui, fugit quo odio nostrum distinctio pariatur accusamus architecto at beatae error dignissimos! Ipsa assumenda accusantium culpa labore corporis voluptates eius ad iusto ratione aperiam dolorum, nobis illum sequi. Laboriosam numquam corporis est soluta eos accusamus asperiores quae animi neque libero?
+                            <h5  th:text="${userservice.findById(commentservice.findById(commentId).get().userId).get().name}" class="card-title"> </h5>
+                            <p th:text="*{content}"  class="card-text">
                             </p>
-                            <p  class="card-text"><small class="text-muted">2023-03-03 </small></p>
+                            <p th:text="*{date}"  class="card-text"><small class="text-muted"> </small></p>
                         </div>
                     </div>
                 </div>

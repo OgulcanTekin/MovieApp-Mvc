@@ -60,4 +60,8 @@ public class GenreService implements IServiceCrud<Genre> {
         }
         return genreList;
     }
+
+    public String getGenreName(Long id){
+        return findById(id).get().getName();
+    }
 }

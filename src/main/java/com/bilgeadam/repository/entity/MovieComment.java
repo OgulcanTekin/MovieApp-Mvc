@@ -21,7 +21,9 @@ public class MovieComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private LocalDate date;
+
+    @Builder.Default
+    private LocalDate date=LocalDate.now();
     private Long userId;
     private Long movieId;
 }
